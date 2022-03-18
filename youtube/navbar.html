@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/e4462d2d1c.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0pxs;
+      }
+      .nav {
+        height: 50px;
+        display: flex;
+      }
+      .leftnav {
+        width: 4%;
+      }
+      .logotext {
+        /* background-color: black; */
+        width: 11%;
+        display: flex;
+      }
+      .searchbox {
+        width: 70%;
+        display: flex;
+      }
+      .fa-bars {
+        margin-top: 10px;
+        margin-left: 15px;
+        font-size: 25px;
+        color: gray;
+      }
+      .fa-youtube {
+        color: red;
+        font-size: 25px;
+        margin-top: 10px;
+        margin-left: 10px;
+      }
+      .yttext {
+        margin-top: 14px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      sup {
+        margin-top: 8px;
+        font-size: 12px;
+        color: gray;
+      }
+      .searchbox button {
+        margin-top: 10px;
+        height: 29px;
+        width: 30px;
+      }
+      .fa-search {
+        color: black;
+        text-align: center;
+      }
+      .insearch {
+        margin-left: 200px;
+        margin-top: 10px;
+      }
+      .insearch input {
+        width: 400px;
+        height: 25px;
+        border: 1px solid black;
+      }
+      .fa-microphone {
+        font-size: 16px;
+        margin: 15px 0px 0px 10px;
+      }
+      .rightnav {
+        width: 20%;
+        display: flex;
+      }
+      .rightnav img {
+        margin-top: 11px;
+        height: 25px;
+        margin-right: 30px;
+      }
+      .fa-th {
+        margin-top: 15px;
+        margin-right: 30px;
+      }
+      .fa-bell {
+        margin-top: 15px;
+        margin-right: 30px;
+      }
+      .fa-user {
+        margin-top: 7px;
+        margin-left: 7px;
+        color: white;
+        border-radius: 50%;
+      }
+      .user {
+        border-radius: 50%;
+        background-color: teal;
+        height: 28px;
+        width: 28px;
+        margin-top: 10px;
+      }
+      .left_main {
+        width: 5%;
+        position: fixed;
+        margin-top: 20px;
+      }
+      .left_main div {
+        margin-bottom: 25px;
+      }
+      .left_main p {
+        font-size: 10px;
+        text-align: center;
+      }
+      .left_main img {
+        height: 20px;
+        margin-left: 20px;
+      }
+      .fa-home {
+        margin-left: 20px;
+      }
+      .fa-compass {
+        margin-left: 20px;
+      }
+      .line {
+        height: 2px;
+        margin-left: 60px;
+        background-color: #f2f2f2;
+      }
+      .top_right_main {
+        margin-left: 100px;
+        height: 50px;
+      }
+      .top_right_main button {
+        margin-top: 10px;
+        margin-left: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        padding: 5px;
+        font-size: 10px;
+      }
+      #search_results {
+        border-top: 1px solid #d4c7c7;
+        background-color: #f2f2f2;
+        margin-left: 110px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .perdiv {
+        width: 250px;
+        margin-top: 10px;
+        margin-left: 20px;
+      }
+      .thumb {
+        width: 100%;
+      }
+      .des {
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="leftnav">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="logotext">
+        <div><i class="fab fa-youtube"></i></div>
+        <div class="yttext">YouTube</div>
+        <sup>IN</sup>
+      </div>
+      <div class="searchbox">
+        <div class="insearch">
+          <input type="text" placeholder="Search" id="video" />
+        </div>
+        <button onclick="searchVideo()"><i class="fas fa-search"></i></button>
+        <div><i class="fas fa-microphone"></i></div>
+      </div>
+      <div class="rightnav">
+        <div>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAVFBMVEX///8AAABhYWEwMDDg4OCysrL7+/vCwsI6Ojr09PTc3NxTU1NtbW1wcHBnZ2dqamrr6+uEhIS5ubnk5ORJSUnPz8+NjY3Hx8d9fX13d3caGhoTExMn5EO4AAACaklEQVR4nO3d6XKCMABFYYN7i2jV7u//nh3cgSRErMRcz/c70/EMiVGxcTAAAAAAAAAAAAAAAAAAAAAAAADAld4/iqx3i/Gqr77PoYnka9JL4FusvtJGPbCPxHXcQLO9e2HkQGPGQQ/zu3PgNHagmYU8zOKnc+EidqAxAXtGboadC2ex+4yZtj7IpbmhMNpWeNa6EDMjXrgsBykX5rtBwoXFfpBuYXYYJFuYHwepFp4CVQuz8yDNwuJikGRhfjmo/8L1ZF6z6voC0FG4rAzqv7D5YnLyv4VZdZBe4bI2SK4wrw9SKywag8QKm4FihY0pqlZYf5KRK8ysg4QKrVdQqdC2BqUKLc+iWoX2NVgSKXRNUaNS6AnUKHSuwZJCoTdQodA3RY1CoWOjP0m+0L1NHKRe2HYFky9sWYOlpAvXIfehky78DRmUdGEQCim8nqXwrrdA7lM43Yyc5s0/5Rm92T5m4ajzX214fczCFwoppJBCCimkkEIKKaSQQgoDCvXfH+q/x/fR+JzG5yk/a6PwJkkX6t+30L/3NA75N8/ECwNukaZe2PJVEyNQ2HoV0y9sW4sChS3fx1Ao1P9em3+iahT6EkUKPRNVpdC9acgUOieqTqHrKgoVOtaiUqF9okoVWhO1Cm0v4MQKLYlqhc2JKlfYSNQrrG8aimcqVLd+yXMxKhNVsrByFTULL9eiaOHFRFUtPCfKFp4mqm7h8QWccOFhoioX7jcN6cLdWhQ/vzS/pTCNM2gXNxTqnyOsfxZ09It4//O89c9kf4Jz9Z/gtxEG+r9vAQAAAAAAAAAAAAAAAAAAAAAA8GT+AJ2UTNDuejMsAAAAAElFTkSuQmCC"
+            alt=""
+          />
+        </div>
+        <div><i class="fas fa-th"></i></div>
+        <div><i class="far fa-bell"></i></div>
+        <div class="user"><i class="far fa-user"></i></div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="left_main">
+        <div>
+          <i class="fas fa-home"></i>
+          <p>Home</p>
+        </div>
+        <div>
+          <i class="far fa-compass"></i>
+          <p>Explore</p>
+        </div>
+        <div>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtp3Eq7ROQwUUvqgXGAmEYNqDmtJVipGzsVUYRZIkzvKla5eDwLPnB96blrcglXMnFtQA&usqp=CAU"
+            alt=""
+          />
+          <p>Subscriptions</p>
+        </div>
+        <div class="subs">
+          <img
+            src="https://static.thenounproject.com/png/2481186-200.png"
+            alt=""
+          />
+          <p>Library</p>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div>
+        <div class="top_right_main">
+          <button onclick="myfun()">ALL</button>
+          <button onclick="myfun()">Mixes</button>
+          <button onclick="myfun()">JavaScript</button>
+          <button onclick="myfun()">Computer programming</button>
+          <button onclick="myfun()">Courses</button>
+          <button>Cricket</button>
+          <button>Allu Arjun</button>
+          <button>Music</button>
+          <button>Stock markets</button>
+          <button>Comedies</button>
+          <button>Tamil Cinema</button>
+          <button>History</button>
+          <button>Akshay Kumar</button>
+        </div>
+        <div id="search_results"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const API = "AIzaSyBkamnrdLQ2zPCeF-ZviaHr_a-nguY7cv0";
+
+  const results_div = document.getElementById("search_results");
+  if (document.getElementById("video").value == "") {
+    let video_query = "trending";
+    searchVideo();
+  }
+
+  async function searchVideo() {
+    document.getElementById("search_results").innerText = "";
+    try {
+      let video_query = document.getElementById("video").value;
+
+      let response = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${video_query}&type=video&key=${API}&maxResults=20`
+      );
+
+      let data = await response.json();
+
+      let videos = data.items;
+
+      // appendVideos(videos);
+      appendImage(videos);
+      console.log(videos);
+      localStorage.setItem("myvideo", JSON.stringify(videos));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const appendVideos = (items) => {
+    items.forEach((el) => {
+      let {
+        id: { videoId },
+      } = el;
+      let iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${videoId}`;
+      iframe.height = "215";
+      iframe.width = "230";
+      iframe.setAttribute("allowfullscreen", "true");
+      results_div.append(iframe);
+    });
+  };
+
+  let appendImage = (items) => {
+    items.forEach((el) => {
+      let main_div = document.createElement("div");
+      main_div.setAttribute("class", "perdiv");
+
+      let thumb = document.createElement("img");
+      // thumb.src = `https://i.ytimg.com/vi/${el.id.videoId}/default.jpg`;
+      thumb.src = el.snippet.thumbnails.default.url;
+      thumb.setAttribute("class", "thumb");
+
+      main_div.onclick = () => {
+        showVideo(data_to_send);
+      };
+
+      let data_to_send = {
+        snippet: el.snippet,
+        videoId: el.id.videoId,
+      };
+
+      let des = document.createElement("p");
+      des.innerText = el.snippet.title;
+      des.setAttribute("class", "des");
+
+      main_div.append(thumb, des);
+      document.getElementById("search_results").append(main_div);
+
+      // console.log(thumb, des);
+    });
+  };
+
+  function showVideo(data) {
+    localStorage.setItem("clicked_video", JSON.stringify(data));
+    window.location.href = "video.html";
+  }
+</script>
